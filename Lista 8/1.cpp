@@ -1,0 +1,66 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+struct Acao
+{
+    string nomeCompanhia;
+    string areaAtuacao;
+    double valorAtual;
+    double valorAnterior;
+    double variacaoPorcentagem;
+};
+
+void preencherAcao(Acao &acao, int i)
+{
+    cout << "\nPreenchendo dados para a acao " << i + 1 << "\n";
+    cout << "Nome da companhia: ";
+    getline(cin, acao.nomeCompanhia);
+
+    cout << "Area de atuacao: ";
+    getline(cin, acao.areaAtuacao);
+
+    cout << "Valor atual da acao: ";
+    cin >> acao.valorAtual;
+
+    cout << "Valor anterior da acao: ";
+    cin >> acao.valorAnterior;
+
+    cin.ignore(1000, '\n');
+
+    if (acao.valorAnterior != 0)
+    {
+        acao.variacaoPorcentagem = ((acao.valorAtual - acao.valorAnterior) / acao.valorAnterior) * 100;
+    }
+    else
+    {
+        acao.variacaoPorcentagem = 0;
+    }
+}
+
+void imprimirAcao(const Acao &acao, int i)
+{
+    cout << "\nRelatorio da acao " << i + 1 << "\n";
+    cout << "Companhia: " << acao.nomeCompanhia << endl;
+    cout << "Area de atuacao: " << acao.areaAtuacao << endl;
+    cout << "Valor anterior: R$" << acao.valorAnterior << endl;
+    cout << "Valor atual: R$" << acao.valorAtual << endl;
+    cout << "Variacao: " << acao.variacaoPorcentagem << "%" << endl;
+}
+
+int main()
+{
+    Acao vetorAcoes[3];
+
+    for (int i = 0; i < 3; i++)
+    {
+        preencherAcao(vetorAcoes[i], i);
+    }
+
+    for (int i = 0; i < 3; i++)
+    {
+        imprimirAcao(vetorAcoes[i], i);
+    }
+
+    return 0;
+}
